@@ -9,7 +9,7 @@ plugins:
 #-------------------------------
 # General Site Settings
 title: Peter Finn
-description: "Hi I'm Peter, and I'm a Data Scientist.  My portfolio focuses on interesting projects I've recently undertaken, with a strong emphasis on business impact. Please visit my Github & LinkedIn pages (or download my Resume) by using the links below!"
+description: "Hi I'm Peter, and I'm a Data Scientist.  My portfolio focuses on interesting projects I've recently undertaken, with a strong emphasis on business impact. Please visit my Github & LinkedIn pages (or download my CV) by using the links below!"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
@@ -22,8 +22,8 @@ avatar_image: /img/pf_profile_photo2.jpg
 
 #-------------------------------
 # Contact links
-linkedln: "https://linkedln.com/#" # Add your linkedln handle
-github: "https://github.com/#"  # Add your github handle
+linkedln: "https://www.linkedin.com/in/peter-finn-data/" # Add your linkedln handle
+github: "https://github.com/petefinn762-bit/"  # Add your github handle
 
 paginate: 6
 paginate_path: "/page/:num"
