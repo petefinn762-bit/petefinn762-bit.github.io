@@ -41,7 +41,7 @@ To achieve this, we looked to build out a predictive model that will find relati
 
 We firstly needed to compile the necessary data from tables in the database, gathering key customer metrics that may help predict *loyalty score*, appending on the dependent variable, and separating out those who did and did not have this dependent variable present.
 
-As we are predicting a numeric output, we tested three regression modelling approaches, namely:
+As we are predicting a numeric output, we tested three regression modelling approaches:
 
 * Linear Regression
 * Decision Tree
