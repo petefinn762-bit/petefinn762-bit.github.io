@@ -3,7 +3,7 @@ I'm a detail-oriented problem-solver focused on making the maximum business impa
 I pride myself on communicating solutions in plain English. 
 I learn fast and am constantly developing new skills and finding ways to improve them.
 
-#SKILLS & TOOLS
+#SKILLS & TOOLS#
 
 **Programming**: SQL, Python (Base, Pandas, Numpy, Matplotlib, Scikit-Learn, Streamlit, Keras, LangChain)
 
