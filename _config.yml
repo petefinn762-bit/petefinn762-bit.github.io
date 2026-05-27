@@ -5,6 +5,7 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-remote-theme
+  - jekyll-seo-tag
 
 #-------------------------------
 # General Site Settings
