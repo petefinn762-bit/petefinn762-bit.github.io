@@ -40,7 +40,7 @@ ___
 
 ### Context <a name="overview-context"></a>
 
-Our client, a grocery retailers, operates a busy customer help-desk, answering queries around store hours, product availability, delivery services, loyalty cards, payments, and general store operations.
+Our client, a grocery retailer, operates a busy customer help-desk, answering queries around store hours, product availability, delivery services, loyalty cards, payments, and general store operations.
 
 They need an **AI assistant** that can answer these questions accurately, consistently, and safely, using only approved internal information.
 
