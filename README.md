@@ -1,5 +1,4 @@
-# Peter Finn | Solving Business Problems 
-# with Data science and Analytics
+# Peter Finn | Data science and Analytics
 I'm a detail-oriented problem-solver focused on making the maximum business impact.
 I pride myself on communicating solutions in plain English. 
 I learn fast and am constantly developing new skills and finding ways to improve them.
