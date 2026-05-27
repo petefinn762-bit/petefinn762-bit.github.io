@@ -4,7 +4,8 @@ I pride myself on communicating solutions in plain English.
 I learn fast and am constantly developing new skills and finding ways to improve them.
 
 ##SKILLS & TOOLS
-###Programming: SQL, Python (Base, Pandas, Numpy, Matplotlib, Scikit-Learn, Streamlit, Keras, LangChain)
+
+**Programming**: SQL, Python (Base, Pandas, Numpy, Matplotlib, Scikit-Learn, Streamlit, Keras, LangChain)
 
 ###Tools: Excel, Tableau, Github, AWS (S3, Lambda, IAM, EC2, SageMaker, RDS, DynamoDB), Docker
 
