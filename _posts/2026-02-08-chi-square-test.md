@@ -5,7 +5,7 @@ image: "/posts/ab-testing-title-img.png"
 tags: [AB Testing, Hypothesis Testing, Chi-Square, Python]
 ---
 
-In this project we apply Chi-Square Test For Independence (a Hypothesis Test) to assess the performance of two types of mailer that were sent out to promote a new service. 
+In this project, I applied the chi-Square test for independence (a hypothesis test) to assess the performance of two types of mailer that were sent out to promote a new service.
 
 # Table of contents
 
@@ -25,60 +25,57 @@ ___
 
 ### Context <a name="overview-context"></a>
 
-Earlier in the year, our client, a grocery retailer, ran a campaign to promote their new "Delivery Club" - an initiative that costs the customer £100 per year for membership, but offers free grocery deliveries rather than the normal cost of £10 per delivery.
+Earlier in the year, my client, a grocery retailer, ran a campaign to promote their new "Delivery Club" - an initiative that costs the customer £100 per year for membership in return for free deliveries that normally cost £10 each.
 
 For the campaign promoting the club, customers were put randomly into three groups: the first group received a low quality, low cost mailer; the second group received a high quality, high cost mailer; and the third group were a control group, receiving no mailer at all.
 
-The client knows that customers who were contacted signed up for the Delivery Club at a far higher rate than the control group, but now want to understand if there is a significant difference in signup rate between the cheap mailer and the expensive one.  This will allow them to make more informed decisions in the future, with the overall aim of optimising campaign ROI.
+The client knew that customers who were contacted signed up for the Delivery Club at a far higher rate than the control group, but wanted to understand if there was a significant difference in signup rate between the cheap mailer and the expensive one.  This would allow them to make more informed decisions in the future, with the overall aim of optimising campaign ROI.
 
 <br>
 <br>
 ### Actions <a name="overview-actions"></a>
 
-For this test, we applied the Chi-Square Test For Independence as it is focused on comparing the *rates* of two groups.  Full details of this test can be found in the dedicated section below.
+For this test, I applied the chi-square test for independence as it is focused on comparing the *rates* of two groups.  Full details of this test can be found in the dedicated section below.
 
-**Note:** Another option when comparing "rates" is a test known as the *Z-Test For Proportions*.  While we could use this test here, we have chosen the Chi-Square Test For Independence for the following reasons:
+**Note:** Another option when comparing "rates" is a test known as the *z-test for proportions*.  While I could have used this test here, I chose the chi-square test for independence for the following reasons:
 
-* The resulting test statistic for both tests will be the same
-* The Chi-Square Test can be represented using 2x2 tables of data, meaning it can be easier to explain to stakeholders
-* The Chi-Square Test can extend out to more than 2 groups, meaning the client can have one consistent approach to measuring significance
+* The chi-square test can be represented using 2x2 tables of data, which is easier to explain to stakeholders
+* The chi-square test can extend out to more than 2 groups, meaning the client can have one consistent approach to measuring significance
 
-From the *campaign_data* table in the client database, we isolated customers that received "Mailer 1" (low cost) and "Mailer 2" (high cost) for this campaign, and excluded customers who were in the control group.
+From the *campaign_data* table in the client database, I isolated customers that received "Mailer 1" (low cost) and "Mailer 2" (high cost) for this campaign, and excluded customers who were in the control group.
 
-We set out our hypotheses and Acceptance Criteria for the test, as follows:
+I set out my hypotheses and acceptance criteria for the test, as follows:
 
 **Null Hypothesis:** There is no relationship between mailer type and signup rate. They are independent.
 **Alternate Hypothesis:** There is a relationship between mailer type and signup rate. They are not independent.
 **Acceptance Criteria:** 0.05
 
-As a requirement of the Chi-Square Test For Independence, we aggregated this data down to a 2x2 matrix for *signup_flag* by *mailer_type* and fed this into the algorithm (using the *SciPy* library) to calculate the Chi-Square Statistic, p-value, Degrees of Freedom, and expected values.
+As a requirement of the chi-square test for independence, I aggregated this data down to a 2x2 matrix for *signup_flag* by *mailer_type* and fed this into the algorithm (using the *SciPy* library) to calculate the chi-square statistic, p-value, degrees of freedom, and expected values.
 
 <br>
 <br>
 
 ### Results & Discussion <a name="overview-results"></a>
 
-Based upon our observed values, we can give this all some context with the sign-up rate of each group.  We get:
+The observed sign-up rates suggested that the high cost mailer was more effective:
 
 * Mailer 1 (Low Cost): **32.8%** signup rate
 * Mailer 2 (High Cost): **37.8%** signup rate
 
-However, the Chi-Square Test gives us the following statistics:
+However, the chi-square test produced the following statistics:
 
 * Chi-Square Statistic: **1.94**
 * p-value: **0.16**
 
-The Critical Value for our specified Acceptance Criteria of 0.05 is **3.84**
+The critical value for the chi-square statistic at our specified significance level of 0.05 is **3.84** (with 1 degree of freedom).
 
-Based upon these statistics, we retain the null hypothesis, and conclude that there is no relationship between mailer type and signup rate.
+Based upon these statistics, I retained the null hypothesis, and concluded that there was no relationship between mailer type and signup rate.
 
-In other words - while we saw that the higher cost Mailer 2 had a higher signup rate (37.8%) than the lower cost Mailer 1 (32.8%) it appears that this difference is not significant, at least at our Acceptance Criteria of 0.05.
+In other words - while I saw that the higher cost Mailer 2 had a higher signup rate (37.8%) than the lower cost Mailer 1 (32.8%), the difference did not meet my acceptance criteria for statistical significance (p < 0.05).
 
-Without running this Hypothesis Test, the client may have concluded that they should always look to go with higher cost mailers - and from what we've seen in this test, that may not be a great decision.  It would result in them spending more, but not *necessarily* gaining any extra revenue as a result.
+Without running this hypothesis test, the client may have concluded that they should always look to go with higher cost mailers. However, this test allowed them to see that this would not *necessarily* gain them any extra revenue as a result.
 
-Our results here also do not say that there *definitely isn't a difference between the two mailers* - we are only advising that we should not make any rigid conclusions *at this point*.  
-
-Running more A/B Tests like this, gathering more data, and then re-running this test may provide us, and the client more insight.
+It is worth noting that I did not claim that there *definitely wasn't a difference between the two mailers*; I merely advised that the client should not make any rigid conclusions *at this point*. More insight would be gained by running more A/B Tests like this, gathering more data, and then re-running this test.
 
 <br>
 <br>
