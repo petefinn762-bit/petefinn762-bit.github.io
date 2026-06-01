@@ -67,7 +67,7 @@ However, the chi-square test produced the following statistics:
 * Chi-Square Statistic: **1.94**
 * p-value: **0.16**
 
-The critical value for the chi-square statistic at our specified significance level of 0.05 is **3.84** (with 1 degree of freedom).
+The critical value for the chi-square statistic at the specified significance level of 0.05 is **3.84** (with 1 degree of freedom).
 
 Based upon these statistics, I retained the null hypothesis, and concluded that there was no relationship between mailer type and signup rate.
 
@@ -231,7 +231,7 @@ The code below does the following:
     * degrees of freedom
     * expected values
 * Prints out the chi-square statistic & p-value from the test
-* Calculates the critical value based upon our significance level & the degrees of freedom
+* Calculates the critical value based upon the significance level & the degrees of freedom
 * Prints out the critical value
 
 ```python
@@ -250,8 +250,8 @@ print(chi2_statistic)
 print(p_value)
 >> 0.16
 
-# find the critical value for our test
-critical_value = chi2.ppf(1 - acceptance_criteria, dof)
+# find the critical value for the test
+critical_value = chi2.ppf(1 - significance_level, dof)
 
 # print critical value
 print(critical_value)
@@ -267,7 +267,7 @@ The observed sign-up rates suggested that the high cost mailer was more effectiv
 The results from the chi-square test would reveal if this difference was robust or if it might have occurred by chance.
 
 I obtained a chi-square statistic of **1.94** and a p-value of **0.16**.  
-The critical value for the chi-square statistic at our specified significance level of 0.05 is **3.84** (with 1 degree of freedom).
+The critical value for the chi-square statistic at the specified significance level of 0.05 is **3.84** (with 1 degree of freedom).
 
 **Note** When applying the chi-square test above, I used the parameter *correction = False* which means I was not applying the *Yates' Correction* which is applied when your Degrees of Freedom is equal to one.  This correction helps to prevent overestimation of statistical signficance in this case.
 
