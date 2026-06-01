@@ -135,7 +135,7 @@ The *observed frequencies* are the true values that we’ve seen.
 
 The *expected frequencies* are essentially what we would *expect* to see based on all of the data.
 
-**Note:** Another option when comparing "rates" is a test known as the *Z-Test For Proportions*.  While I could have used this test here, I chose the chi-square test for independence for the following reasons:
+**Note:** Another option when comparing "rates" is a test known as the *Z-test for proportions*.  While I could have used this test here, I chose the chi-square test for independence for the following reasons:
 
 * The chi-square test can be represented using 2x2 tables of data, which is easier to explain to stakeholders
 * The chi-square test can extend out to more than 2 groups, meaning the client can have one consistent approach to measuring significance
@@ -149,9 +149,9 @@ In the client database, I had access to a *campaign_data* table which recorded w
 
 For this task, I was looking to find evidence that the Delivery Club signup rate for customers that received "Mailer 1" (low cost) was different to those who received "Mailer 2" (high cost) and thus from the *campaign_data* table I only extracted customers in those two groups, and excluded customers who were in the control group.
 
-In the code below, I aimed to achieve the following:
+The code below is designed to achieve the following:
 
-* Load in the Python libraries I required for importing the data and performing the chi-square test (using SciPy)
+* Load in the Python libraries required for importing the data and performing the chi-square test (using SciPy)
 * Import the required data from the *campaign_data* table
 * Exclude customers in the control group, producing a dataset with Mailer 1 & Mailer 2 customers only
 
@@ -269,7 +269,7 @@ The results from the chi-square test would reveal if this difference was robust 
 I obtained a chi-square statistic of **1.94** and a p-value of **0.16**.  
 The critical value for the chi-square statistic at the specified significance level of 0.05 is **3.84** (with 1 degree of freedom).
 
-**Note** When applying the chi-square test above, I used the parameter *correction = False* which means I was not applying the *Yates' Correction* which is applied when your Degrees of Freedom is equal to one.  This correction helps to prevent overestimation of statistical signficance in this case.
+**Note** When applying the chi-square test above, I used the parameter *correction = False* which means I was not applying the *Yates' Correction*. This is applied to prevent overestimation of statistical signficance when your Degrees of Freedom is equal to one and one of your values in the matrix is below 5, which was not the case here.
 
 ___
 
