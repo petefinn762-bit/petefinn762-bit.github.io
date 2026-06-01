@@ -111,9 +111,9 @@ The aim of the hypothesis test is to look for evidence to support or reject the 
 <br>
 **The Significance Level**
 
-In a hypothesis test, before we collect any data or run any numbers we specify a significance level.  This is a p-value threshold at which we’ll decide to reject or support the null hypothesis.  It is essentially a line we draw in the sand saying "if I were to run this test many, many times, what proportion of those times would I want to see different results come out, in order to feel comfortable or confident that my results were not just some unusual occurrence"
+In a hypothesis test, before we collect any data or run any numbers, we specify a significance level.  This is a p-value threshold at which we’ll decide to reject or support the null hypothesis.  It is essentially a line we draw in the sand saying "if I were to run this test many, many times, what proportion of those times would I want to see different results come out, in order to feel comfortable or confident that my results were not just some unusual occurrence"
 
-Conventionally, we set our significance level at 0.05 - but this does not have to be the case.  If we need to be more confident that something did not occur through chance alone, we could lower this value down to something much smaller, meaning that we only come to the conclusion that the outcome was special or rare if it’s extremely rare.
+Conventionally, we set our significance level at 0.05 - but this does not have to be the case.  If we need to be more confident that something did not occur through chance alone, we could lower this value to something much smaller, meaning that we only come to the conclusion that the outcome was special or rare if it’s extremely rare.
 
 So to summarise, in a hypothesis test, we test the null hypothesis using a p-value and then decide its fate based on a pre-determined significance level.
 
@@ -127,34 +127,33 @@ In the case of the task here, where I was looking to understand the difference i
 <br>
 #### Chi-Square Test For Independence
 
-The Chi-Square Test For Independence is a type of Hypothesis Test that assumes observed frequencies for categorical variables will match the expected frequencies.
+The chi-square test for independence is a type of hypothesis test that assumes observed frequencies for categorical variables will match the expected frequencies.
 
-The *assumption* is the Null Hypothesis, which as discussed above is always the viewpoint that the two groups will be equal.  With the Chi-Square Test For Independence we look to calculate a statistic which, based on the specified Acceptance Criteria, will mean we either reject or support this initial assumption.
+The *assumption* is the null hypothesis, which as discussed above is always the viewpoint that the two groups will be equal.  With the chi-square test for independence we look to calculate a statistic which, based on the specified significance level, will mean we either reject or support this initial assumption.
 
 The *observed frequencies* are the true values that we’ve seen.
 
 The *expected frequencies* are essentially what we would *expect* to see based on all of the data.
 
-**Note:** Another option when comparing "rates" is a test known as the *Z-Test For Proportions*.  While we could use this test here, we have chosen the Chi-Square Test For Independence for the following reasons:
+**Note:** Another option when comparing "rates" is a test known as the *Z-Test For Proportions*.  While I could have used this test here, I chose the chi-square test for independence for the following reasons:
 
-* The resulting test statistic for both tests will be the same
-* The Chi-Square Test can be represented using 2x2 tables of data, meaning it can be easier to explain to stakeholders
-* The Chi-Square Test can extend out to more than 2 groups, meaning the business can have one consistent approach to measuring significance
+* The chi-square test can be represented using 2x2 tables of data, which is easier to explain to stakeholders
+* The chi-square test can extend out to more than 2 groups, meaning the client can have one consistent approach to measuring significance
 
 ___
 
 <br>
 # Data Overview & Preparation  <a name="data-overview"></a>
 
-In the client database, we have a *campaign_data* table which shows us which customers received each type of "Delivery Club" mailer, which customers were in the control group, and which customers joined the club as a result.
+In the client database, I had access to a *campaign_data* table which recorded which customers received each type of "Delivery Club" mailer, which customers were in the control group, and which customers joined the club as a result.
 
-For this task, we are looking to find evidence that the Delivery Club signup rate for customers that received "Mailer 1" (low cost) was different to those who received "Mailer 2" (high cost) and thus from the *campaign_data* table we will just extract customers in those two groups, and exclude customers who were in the control group.
+For this task, I was looking to find evidence that the Delivery Club signup rate for customers that received "Mailer 1" (low cost) was different to those who received "Mailer 2" (high cost) and thus from the *campaign_data* table I only extracted customers in those two groups, and excluded customers who were in the control group.
 
-In the code below, we:
+In the code below, I aimed to achieve the following:
 
-* Load in the Python libraries we require for importing the data and performing the chi-square test (using SciPy)
+* Load in the Python libraries I required for importing the data and performing the chi-square test (using SciPy)
 * Import the required data from the *campaign_data* table
-* Exclude customers in the control group, giving us a dataset with Mailer 1 & Mailer 2 customers only
+* Exclude customers in the control group, producing a dataset with Mailer 1 & Mailer 2 customers only
 
 <br>
 ```python
@@ -190,7 +189,7 @@ A sample of this data (the first 10 rows) can be seen below:
 | 435 | delivery_club | Mailer2 | 0 |
 
 <br>
-In the DataFrame we have:
+The DataFrame contains the following:
 
 * customer_id
 * campaign name
@@ -203,41 +202,41 @@ ___
 # Applying Chi-Square Test For Independence <a name="chi-square-application"></a>
 
 <br>
-#### State Hypotheses & Acceptance Criteria For Test
+#### State Hypotheses & Significance Level For Test
 
-The very first thing we need to do in any form of Hypothesis Test is state our Null Hypothesis, our Alternate Hypothesis, and the Acceptance Criteria (more details on these in the section above)
+The very first thing we need to do in any form of hypothesis test is state our null hypothesis, our alternate hypothesis, and the significance level (more details on these in the section above).
 
-In the code below we code these in explicitly and clearly so we can utilise them later to explain the results.  We specify the common Acceptance Criteria value of 0.05.
+As can be seen below, I coded these in explicitly so I could utilise them later to explain the results.  I specified the common significance level of 0.05.
 
 ```python
 
-# specify hypotheses & acceptance criteria for test
+# specify hypotheses & significance level for test
 null_hypothesis = "there is no relationship between mailer type and signup rate.  They are independent."
 alternate_hypothesis = "there is a relationship between mailer type and signup rate.  They are not independent."
-acceptance_criteria = 0.05
+significance_level = 0.05
 
 ```
 
 <br>
 #### Calculate Observed Frequencies & Expected Frequencies
 
-As mentioned in the section above, in a Chi-Square Test For Independence, the *observed frequencies* are the true values that we’ve seen, in other words the actual rates per group in the data itself.  The *expected frequencies* are what we would *expect* to see based on *all* of the data combined.
+As mentioned in the section above, in a chi-square test for independence, the *observed frequencies* are the true values that we’ve seen, in other words the actual rates per group in the data itself.  The *expected frequencies* are what we would *expect* to see based on *all* of the data combined.
 
 The code below does the following:
 
-* Summarises our dataset to a 2x2 matrix for *signup_flag* by *mailer_type*
+* Summarises the dataset to a 2x2 matrix for *signup_flag* by *mailer_type*
 * Based on this, it calculates the
-    * Chi-Square Statistic
+    * chi-square statistic
     * p-value
-    * Degrees of Freedom
-    * Expected Values
-* Prints out the Chi-Square Statistic & p-value from the test
-* Calculates the Critical Value based upon our Acceptance Criteria & the Degrees Of Freedom
-* Prints out the Critical Value
+    * degrees of freedom
+    * expected values
+* Prints out the chi-square statistic & p-value from the test
+* Calculates the critical value based upon our significance level & the degrees of freedom
+* Prints out the critical value
 
 ```python
 
-# aggregate our data to get observed values
+# aggregate the data to get observed values
 observed_values = pd.crosstab(campaign_data["mailer_type"], campaign_data["signup_flag"]).values
 
 # run the chi-square test
@@ -260,60 +259,59 @@ print(critical_value)
 
 ```
 <br>
-Based upon our observed values, we can give this all some context with the sign-up rate of each group.  We get:
+The observed sign-up rates suggested that the high cost mailer was more effective:
 
 * Mailer 1 (Low Cost): **32.8%** signup rate
 * Mailer 2 (High Cost): **37.8%** signup rate
 
-From this, we can see that the higher cost mailer does lead to a higher signup rate.  The results from our Chi-Square Test will provide us more information about how confident we can be that this difference is robust, or if it might have occurred by chance.
+The results from the chi-square test would reveal if this difference was robust or if it might have occurred by chance.
 
-We have a Chi-Square Statistic of **1.94** and a p-value of **0.16**.  The critical value for our specified Acceptance Criteria of 0.05 is **3.84**
+I obtained a chi-square statistic of **1.94** and a p-value of **0.16**.  
+The critical value for the chi-square statistic at our specified significance level of 0.05 is **3.84** (with 1 degree of freedom).
 
-**Note** When applying the Chi-Square Test above, we use the parameter *correction = False* which means we are not applying what is known as the *Yates' Correction* which is applied when your Degrees of Freedom is equal to one.  This correction helps to prevent overestimation of statistical signficance in this case.
+**Note** When applying the chi-square test above, I used the parameter *correction = False* which means I was not applying the *Yates' Correction* which is applied when your Degrees of Freedom is equal to one.  This correction helps to prevent overestimation of statistical signficance in this case.
 
 ___
 
 <br>
 # Analysing The Results <a name="chi-square-results"></a>
 
-At this point we have everything we need to understand the results of our Chi-Square test - and just from the results above we can see that, since our resulting p-value of **0.16** is *greater* than our Acceptance Criteria of 0.05, we will _retain_ the Null Hypothesis and conclude that there is no significant difference between the signup rates of Mailer 1 and Mailer 2.
+At this point, I had everything I needed to understand the results of the chi-square test - and just from the results above, I could see that, since the resulting p-value of **0.16** was *greater* than the significance level of 0.05, I would _retain_ the Null Hypothesis and conclude that there was no significant difference between the signup rates of Mailer 1 and Mailer 2.
 
-We can make the same conclusion based upon our resulting Chi-Square statistic of **1.94** being _lower_ than our Critical Value of **3.84**
+I could have made the same conclusion based upon the resulting chi-square statistic of **1.94** being _lower_ than the critical value of **3.84**
 
-To make this script more dynamic, we can create code to automatically interpret the results and explain the outcome to us...
+To make this script more dynamic, I created code to automatically interpret the results and explain the outcome...
 
 ```python
 
 # print the results (based upon p-value)
-if p_value <= acceptance_criteria:
-    print(f"As our p-value of {p_value} is lower than our acceptance_criteria of {acceptance_criteria}, we reject the null hypothesis and conclude that {alternate_hypothesis}")
+if p_value <= significance_level:
+    print(f"As the p-value of {p_value} is lower than the significance_level of {significance_level}, we reject the null hypothesis and conclude that {alternate_hypothesis}")
 else:
-    print(f"As our p-value of {p_value} is higher than our acceptance_criteria of {acceptance_criteria}, we retain the null hypothesis and conclude that {null_hypothesis}")
+    print(f"As the p-value of {p_value} is higher than the significance_level of {significance_level}, we retain the null hypothesis and conclude that {null_hypothesis}")
 
->> As our p-value of 0.16351 is higher than our acceptance_criteria of 0.05, we retain the null hypothesis and conclude that there is no relationship between mailer type and signup rate.  They are independent.
+>> As the p-value of 0.16351 is higher than the significance_level of 0.05, we retain the null hypothesis and conclude that there is no relationship between mailer type and signup rate.  They are independent.
 
 
 # print the results (based upon p-value)
 if chi2_statistic >= critical_value:
-    print(f"As our chi-square statistic of {chi2_statistic} is higher than our critical value of {critical_value}, we reject the null hypothesis and conclude that {alternate_hypothesis}")
+    print(f"As the chi-square statistic of {chi2_statistic} is higher than the critical value of {critical_value}, we reject the null hypothesis and conclude that {alternate_hypothesis}")
 else:
-    print(f"As our chi-square statistic of {chi2_statistic} is lower than our critical value of {critical_value}, we retain the null hypothesis and conclude that {null_hypothesis}")
+    print(f"As the chi-square statistic of {chi2_statistic} is lower than the critical value of {critical_value}, we retain the null hypothesis and conclude that {null_hypothesis}")
     
->> As our chi-square statistic of 1.9414 is lower than our critical value of 3.841458820694124, we retain the null hypothesis and conclude that there is no relationship between mailer type and signup rate.  They are independent.
+>> As the chi-square statistic of 1.9414 is lower than the critical value of 3.841458820694124, we retain the null hypothesis and conclude that there is no relationship between mailer type and signup rate.  They are independent.
 
 ```
 <br>
-As we can see from the outputs of these print statements, we do indeed retain the null hypothesis.  We could not find enough evidence that the signup rates for Mailer 1 and Mailer 2 were different and thus conclude that there was no significant difference.
+As can be seen from the outputs of these print statements, I did indeed retain the null hypothesis.  I could not find enough evidence that the signup rates for Mailer 1 and Mailer 2 were different and thus concluded that there was no significant difference.
 
 ___
 
 <br>
 # Discussion <a name="discussion"></a>
 
-While we saw that the higher cost Mailer 2 had a higher signup rate (37.8%) than the lower cost Mailer 1 (32.8%), it appears that this difference is not significant, at least at our Acceptance Criteria of 0.05.
+While I saw that the higher cost Mailer 2 had a higher signup rate (37.8%) than the lower cost Mailer 1 (32.8%), the difference did not meet my acceptance criteria for statistical significance (p < 0.05).
 
-Without running this Hypothesis Test, the client may have concluded that they should always look to go with higher cost mailers - and from what we've seen in this test, that may not be a great decision.  It would result in them spending more, but not *necessarily* gaining any extra revenue as a result.
+Without running this hypothesis test, the client may have concluded that they should always look to go with higher cost mailers. However, this test allowed them to see that this would not *necessarily* gain them any extra revenue as a result.
 
-Our results here also do not say that there *definitely isn't a difference between the two mailers* - we are only advising that we should not make any rigid conclusions *at this point*.  
-
-Running more A/B Tests like this, gathering more data, and then re-running this test may provide us, and the client more insight.
+It is worth noting that I did not claim that there *definitely wasn't a difference between the two mailers*; I merely advised that the client should not make any rigid conclusions *at this point*. More insight would be gained by running more A/B Tests like this, gathering more data, and then re-running this test.
