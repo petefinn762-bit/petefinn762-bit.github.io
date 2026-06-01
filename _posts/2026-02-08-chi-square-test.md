@@ -46,8 +46,8 @@ From the *campaign_data* table in the client database, I isolated customers that
 
 I set out my hypotheses and acceptance criteria for the test, as follows:
 
-**Null Hypothesis:** There is no relationship between mailer type and signup rate. They are independent.
-**Alternate Hypothesis:** There is a relationship between mailer type and signup rate. They are not independent.
+**Null Hypothesis:** There is no relationship between mailer type and signup rate. They are independent.  
+**Alternate Hypothesis:** There is a relationship between mailer type and signup rate. They are not independent.  
 **Significance Level:** 0.05
 
 As a requirement of the chi-square test for independence, I aggregated this data down to a 2x2 matrix for *signup_flag* by *mailer_type* and fed this into the algorithm (using the *SciPy* library) to calculate the chi-square statistic, p-value, degrees of freedom, and expected values.
