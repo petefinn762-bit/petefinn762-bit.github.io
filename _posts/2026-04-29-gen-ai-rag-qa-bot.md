@@ -5,11 +5,11 @@ image: "/posts/gen-ai-rag-title-img.png"
 tags: [GenAI, RAG, LLMs, Python, LangChain]
 ---
 
-In this project we build a real, production-style AI assistant for our grocery retail client, capable of answering customer help-desk questions using **Retrieval Augmented Generation (RAG)**.  
+In this project, I built a real, production-style AI assistant for a grocery retail client, capable of answering customer help-desk questions using **Retrieval Augmented Generation (RAG)**.  
 
-We begin by building a core RAG system that loads internal documents, chunks them intelligently, embeds them into a vector database, retrieves relevant content, and generates grounded answers.  
+I began by building a core RAG system that loaded internal documents, chunked them intelligently, embedded them into a vector database, retrieved relevant content, and generated grounded answers.  
 
-We then extend the assistant by **adding conversational memory**, allowing the model to maintain a short-term personalised dialogue while still respecting strict grounding rules.
+I then extended the assistant by **adding conversational memory**, allowing the model to maintain a short-term personalised dialogue while still respecting strict grounding rules.
 
 # Table of Contents
 
