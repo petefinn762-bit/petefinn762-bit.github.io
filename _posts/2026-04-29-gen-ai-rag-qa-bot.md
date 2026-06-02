@@ -288,10 +288,10 @@ This was designed to keep the context focused and prevent irrelevant content fro
 
 ## Full RAG Pipeline <a name="rag-pipeline"></a>
 
-This pipeline connects all of the key components of our system:
+Finally, I created a pipeline to connect all of the key components of the system:
 
 1. Take in the user query  
-2. Retrieve in relevant chunks from the vector database  
+2. Retrieve relevant chunks from the vector database  
 3. Format them  
 4. Inject them into the prompt template, along with the system instructions and user query 
 5. Pass this information to the LLM  
@@ -314,15 +314,15 @@ rag_answer_chain = (
 )
 ```
 <br>
-This is the *brain* of the system, the end-to-end mechanism that retrieves, processes and then answers!
+This was the *brain* of the system, the end-to-end mechanism that retrieved, processed and then answered!
 
 ___
 
 # 04. Enhancing the Assistant With Memory <a name="rag-memory"></a>
 
-In the enhanced version of the RAG system, we introduced **conversational memory**, allowing multi-turn dialogue while still obeying strict grounding rules.
+In the enhanced version of the RAG system, I introduced **conversational memory**, allowing multi-turn dialogue while still obeying strict grounding rules.
 
-Memory is added through:
+Memory was added with the following code:
 
 ```python
 
@@ -347,13 +347,13 @@ chain_with_history = RunnableWithMessageHistory(
 )
 ```
 
-When adding memory, we also update the system prompt to include a placeholder place for it to be injected.  It is also important to include information in the system instructions about how to make use of this memory, i.e. to only use it for personalisation
+When adding memory, it is necessary to update the system prompt to include a placeholder place for it to be injected.  It is also important to include information in the system instructions about how to make use of this memory, i.e. to only use it for personalisation.
 
 ___
 
 # 05. Application & Examples <a name="rag-application"></a>
 
-To pass a query into the system, and have a result returned, we use the following code:
+To pass a query into the system, and have a result returned, I used the following code:
 
 ```python
 query = "What hours are you open on Easter Sunday?"
@@ -361,7 +361,7 @@ response = rag_answer_chain.invoke({"input": query})
 print(response)
 ```
 <br>
-As an illustration, here are two example queries we passed into the system, along with the resulting response:
+As an illustration, here are two example queries I passed into the system, along with the resulting response:
 <br><br>
 **Query:** What time can I come into the store today?  
 **Response:** Most locations are open 7am-10pm today.  If it's a holiday, hours may vary - please check the Store Locator for your specific store's hours  
@@ -377,17 +377,17 @@ ___
 
 One of the most important aspects of building safe and reliable RAG systems is the ability to **inspect exactly which documents were used** to produce an answer.  
 
-This helps us confirm that:
+This helps us confirm that
 
-* The system is grounding answers in the correct internal documentation  
-* No irrelevant or low-quality chunks were retrieved  
-* The model is not hallucinating content  
-* Retrieval performance is behaving as expected  
-* The system is explainable and auditable  
+* the system is grounding answers in the correct internal documentation  
+* no irrelevant or low-quality chunks were retrieved  
+* the model is not hallucinating content  
+* retrieval performance is behaving as expected  
+* the system is explainable and auditable  
 
-To enable this, we implemented a clever parallel chain that returns **both** the final answer, and the raw retrieved context (the documents)  
+To enable this, I implemented a clever, parallel chain that returned **both** the final answer, and the raw retrieved context (the documents).  
 
-The code that enables this behaviour is below:
+The code that enabled this behaviour is below:
 
 ```python
 from langchain_core.runnables import RunnableParallel
@@ -404,7 +404,7 @@ response = rag_with_context.invoke({"input": user_prompt})
 print(response["answer"].content)
 ```
 <br>
-By calling *RunnableParallel* we are able to run multiple pieces of logic at once.  
+By calling *RunnableParallel*, I was able to run multiple pieces of logic at once.  
 
 In this case, **answer** runs the full RAG pipeline, **context** runs the retriever on it's own (allowing us to capture the returned chunks), and **input** returns the original user query.  When we invoke this, we are returned a *dictionary* containing everything we need to inspect what drove the LLM's answer.
 
