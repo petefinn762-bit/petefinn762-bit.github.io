@@ -46,14 +46,13 @@ They needed an **AI assistant** that could answer these questions accurately, co
 
 ### Actions <a name="overview-actions"></a>
 
-I built a full end-to-end RAG system that:
-
-* Loaded internal help-desk documentation  
-* Split it into meaningful chunks  
-* Created dense vector embeddings  
-* Stored these embeddings in a persistent vector database  
-* Retrieved only the most relevant content at query time  
-* Generated answers grounded strictly in this retrieved context  
+I built a full end-to-end RAG system that
+* loaded internal help-desk documentation  
+* split it into meaningful chunks  
+* created dense vector embeddings  
+* stored these embeddings in a persistent vector database  
+* retrieved only the most relevant content at query time  
+* generated answers grounded strictly in this retrieved context  
 
 I also extended the project with **conversational memory**, enabling more natural multi-turn interactions while ensuring the assistant never hallucinates.
 
@@ -61,18 +60,16 @@ Internally, I also added monitoring, tracing, and evaluation using LangSmith dur
 
 ### Results <a name="overview-results"></a>
 
-The final assistant:
-
-* Reliably answers customer help-desk questions  
-* Grounds every answer in retrieved internal documentation  
-* Rejects unsupported questions with a safe fallback message  
-* Maintains short-term conversational history for better UX  
-* Prevents hallucinations using strict grounding rules  
+The final assistant
+* reliably answers customer help-desk questions  
+* grounds every answer in retrieved internal documentation  
+* rejects unsupported questions with a safe fallback message  
+* maintains short-term conversational history for better UX  
+* prevents hallucinations using strict grounding rules  
 
 ### Growth/Next Steps <a name="overview-growth"></a>
 
 Potential future enhancements include:
-
 * Ingestion of multiple document types (PDFs, product catalogues)  
 * Adding tool use such as SQL lookups for live stock, prices, or loyalty data  
 * Adding a real chat interface (frontend + backend)  
@@ -127,10 +124,10 @@ A naive solution would be to simply **feed the entire help-desk document into th
 
 With RAG:
 
-1. We embed the documents into a vector database.  
-2. When a user asks a question, we retrieve *only the most relevant chunks*.  
-3. We pass this small, focused context into the LLM.  
-4. The LLM generates a grounded answer based solely on verified internal content.
+1. We embed the documents into a vector database  
+2. When a user asks a question, we retrieve *only the most relevant chunks*  
+3. We pass this small, focused context into the LLM
+4. The LLM generates a grounded answer based solely on verified internal content
 
 This ensures answers are **factual, fast, cheap, and controllable**.
 
@@ -369,7 +366,7 @@ As an illustration, here are two example queries I passed into the system, along
 **Query:** What is a baby dolphin called?  
 **Response:** I don't have that information in the provided context. Please email human@abc-grocery.com and our team can help.  
 <br>
-The latter question is important and shows a behaviour that we want, and that we described in the system instructions.  This was a question that was not answerable using the business-specific context documents, and thus it did not create an answer from it's own memory, it provided the default response.
+The latter question is important and shows a behaviour that we want, and that we described in the system instructions.  This was a question that was not answerable using the business-specific context documents, and thus it did not create an answer from its own memory - it provided the default response.
 
 ___
 
@@ -378,14 +375,13 @@ ___
 One of the most important aspects of building safe and reliable RAG systems is the ability to **inspect exactly which documents were used** to produce an answer.  
 
 This helps us confirm that
-
 * the system is grounding answers in the correct internal documentation  
 * no irrelevant or low-quality chunks were retrieved  
 * the model is not hallucinating content  
 * retrieval performance is behaving as expected  
 * the system is explainable and auditable  
 
-To enable this, I implemented a clever, parallel chain that returned **both** the final answer, and the raw retrieved context (the documents).  
+To enable this, I implemented a parallel chain that returned **both** the final answer, and the raw retrieved context (the documents).  
 
 The code that enabled this behaviour is below:
 
@@ -406,11 +402,9 @@ print(response["answer"].content)
 <br>
 By calling *RunnableParallel*, I was able to run multiple pieces of logic at once.  
 
-In this case, **answer** runs the full RAG pipeline, **context** runs the retriever on it's own (allowing us to capture the returned chunks), and **input** returns the original user query.  When we invoke this, we are returned a *dictionary* containing everything we need to inspect what drove the LLM's answer.
+In this case, **answer** ran the full RAG pipeline, **context** ran the retriever on its own (allowing me to capture the returned chunks), and **input** returned the original user query.  When I invoked rag_with_context, I was returned a *dictionary* containing everything I needed to inspect what drove the LLM's answer.
 
-This means a single **.invoke()** call returns a *dictionary* containing everything we need:
-
-We inspected these retrieved documents in *LangSmith* allowing us to verify that our vector store, retriever, and chunking strategy were behaving correctly.
+I inspected these retrieved documents in *LangSmith*, allowing me to verify that my vector store, retriever, and chunking strategy were behaving correctly.
 
 This approach is extremely important in real-world RAG systems where explainability, auditability, and debugging retrieval issues are essential.
 
