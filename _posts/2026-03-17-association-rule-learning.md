@@ -43,10 +43,10 @@ Then I brought in the sample data, and got it into the right format for the Apri
 
 From there I applied the Apriori algorithm to provide the following relationship metrics:
 
-* Support
-* Confidence
-* Expected Confidence
-* Lift
+* support
+* confidence
+* expected confidence
+* lift
 
 These metrics examine product relationships in different ways, so I utilised each to put forward ideas that address each of the tasks at hand.  You can read more about these metrics, and the Apriori algorithm, in the relevant section below.
 
@@ -137,10 +137,10 @@ One powerful, intuitive, and commonly used algorithm for Association Rule Learni
 
 In Apriori there are four key metrics:
 
-* Support
-* Confidence
-* Expected Confidence
-* Lift
+* support
+* confidence
+* expected confidence
+* lift
 
 Each of these metrics help us understand items and their relationship with other items in their own way.
 
@@ -186,7 +186,7 @@ While above we're just discussing two products (item A and item B), in reality t
 <br>
 ##### An Important Consideration
 
-Something to consider when assessing the results of Apriori is that Item/Product relationships that have a *high Lift score* but also have a *low Support score* should be interpreted with caution!
+Something to consider when assessing the results of Apriori is that item/product relationships that have a *high lift score* but also have a *low support score* should be interpreted with caution!
 
 In other words, if we sorted all item relationships by descending lift score, the one that comes out on top might initially seem very impressive and it may appear that there is a very strong relationship between the two items.  Always take into account the support metric - it could be that this relationship is only taking place by chance due to the rarity of the item set.
 
@@ -241,9 +241,9 @@ In the code below, I applied the apriori algorithm from the apyori library.
 
 This algorithm allows us to specify the association rules that we want.  I set:
 
-* A minimum *Support* of 0.003 to eliminate very rare product sets
-* A minimum *Confidence* of 0.2
-* A minimum *Lift* of 3 to ensure I was only focusing on product sets with strong relationships
+* A minimum *support* of 0.003 to eliminate very rare product sets
+* A minimum *confidence* of 0.2
+* A minimum *lift* of 3 to ensure I was only focusing on product sets with strong relationships
 * A minimum and maximum length of 2, meaning I was focusing on product *pairs* rather than larger sets
 
 ```python
@@ -302,7 +302,7 @@ A sample of this data (the first 5 product pairs - not in any order) can be seen
 | … | … | … | … | … |
 
 <br>
-In the DataFrame, there are two products in the pair, and then the three key metrics: Support, Confidence, and Lift. 
+In the DataFrame, there are two products in the pair, and then the three key metrics: support, confidence, and lift. 
 
 ___
 <br>
@@ -311,17 +311,17 @@ ___
 <br>
 #### Associated Products
 
-Now the data was in a useable format, I wanted to look at the product pairs with the *strongest* relationships. I therefore sorted the Lift column in descending order.
+Now the data was in a useable format, I wanted to look at the product pairs with the *strongest* relationships. I therefore sorted the lift column in descending order.
 
 ```python
 
-# sort pairs by descending Lift
+# sort pairs by descending lift
 apriori_rules_df.sort_values(by = "lift", ascending = False, inplace = True)
 
 ```
 
 <br>
-In the table below, we can see the ten highest product relationships, based upon Lift.
+In the table below, we can see the ten highest product relationships, based upon lift.
 <br>
 <br>
 
@@ -362,7 +362,7 @@ apriori_rules_df[apriori_rules_df["product1"].str.contains("New Zealand")]
 
 ```
 <br>
-The results of this search, in order of descending Lift, are as follows:
+The results of this search, in order of descending lift, are as follows:
 <br>
 <br>
 
