@@ -171,7 +171,7 @@ text = docs[0].page_content
 
 ## Document Chunking <a name="rag-chunking"></a>
 
-I split the markdown by level-3 headers (`###`), where each header introduces a new Q&A pair.
+I split the markdown by level-3 headers (`###`), where each header introduced a new Q&A pair.
 
 ```python
 from langchain_text_splitters import MarkdownHeaderTextSplitter
