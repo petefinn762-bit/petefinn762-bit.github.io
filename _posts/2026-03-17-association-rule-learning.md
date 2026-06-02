@@ -55,11 +55,11 @@ These metrics examine product relationships in different ways, so I utilised eac
 
 ### Results <a name="overview-results"></a>
 
-Interestingly, the strongest relationship existed between two products labelled as "gifts" - this was useful information for the category managers, as it suggested that gifts should be available in the same section of the aisle, if that was not already the case.
+The strongest relationship existed between two products labelled as "gifts" - this was useful information for the category managers as it suggested that wine and beer gifts should be available in the same section of the aisle, rather than in their respective sections, if that was not already the case. Furthermore, these were often combined with a spirits purchase, possibly as another type of gift, so there was scope for some spirit and gift set bundles.
 
-There was also some strong relationships between French wines, which suggested that wines should be arranged by country, rather than by type, to make it easier for customers to find what they are after. Interestingly, while there appeared to be *some* relationship between different New Zealand wines, they seemed to be more associated with French and South American wines - where the climate is similar - than they were with Australian Wines. This suggested that they should not necessarily be placed alongside Australian wines simply because they are both antipodean!
+There were also some strong relationships between French wines, which suggested that wines should be arranged by country, rather than by type, to make it easier for customers to find what they are after. Interestingly, while there appeared to be *some* relationship between different New Zealand wines, they seemed to be more associated with French and South American wines - where the climate is similar - than they were with Australian Wines. This suggested that they should not necessarily be placed alongside Australian wines simply because they are both antipodean!
 
-Another interesting association was between products labelled "small".  It was possible that these were being bought by customers doing a light shop with a basket, rather than a trolley, so I suggested that this be looked at more closely by category managers, in case they felt it was worth placing these items nearer to the checkout so that they were easier to carry.
+Another interesting association was between wine products labelled "small".  It was possible that these were being bought by customers who did not drink wine very often and therefore only wanted wine to go with a specific meal. I suggested that it would be worth investigating what food products these customers were buying in the same transaction so that they could be bundled as part of a meal deal.
 
 In addition to these specific insights, I proposed to build a "search engine" for category managers where they could look-up products by keyword in the product association table to investigate other relationships.
 
@@ -340,16 +340,16 @@ In the table below, we can see the ten highest product relationships, based upon
 | Small Sizes Wht Othr | Small Sizes White | 0.003 | 0.414 | 6.176 |
 
 <br>
-Interestingly, the strongest relationship existed between two products labelled as "gifts" - this was useful information for the category managers as it suggested that gifts should be available in the same section of the aisle, if that was not already the case.
+The strongest relationship existed between two products labelled as "gifts" - this was useful information for the category managers as it suggested that wine and beer gifts should be available in the same section of the aisle, rather than in their respective sections, if that was not already the case. Furthermore, these were often combined with a spirits purchase, possibly as another type of gift, so there was scope for some spirit and gift set bundles.
 
-There was also some strong relationships between French wines, which suggested that wines should be arranged by country, rather than by type, to make it easier for customers to find what they are after. 
+There were also some strong relationships between French wines, which suggested that wines should be arranged by country, rather than by type, to make it easier for customers to find what they are after. 
 
-Another interesting association was between products labelled "small".  It was possible that these were being bought by customers doing a light shop with a basket, rather than a trolley, so I suggested that this be looked at more closely by category managers, in case they felt it was worth placing these items nearer to the checkout so that they were easier to carry.
+Another interesting association was between wine products labelled "small".  It was possible that these were being bought by customers who did not drink wine very often and therefore only wanted wine to go with a specific meal. I suggested that it would be worth investigating what food products these customers were buying in the same transaction so that they could be bundled as part of a meal deal.
 
 <br>
 #### Search Tool For Category Managers
 
-With the data now stored as a DataFrame, we will also go back to the client with a proposal to build a simple "search" tool for Category Managers to use.
+With the data now stored as a DataFrame, I proposed to build a simple "search" tool for Category Managers to use.
 
 An example of how this might work would be to test a hypothesis around New Zealand wines.
 
@@ -387,14 +387,12 @@ The results of this search, in order of descending Lift, are as follows:
 <br>
 There appears to be *some* relationship between New Zealand wines and other New Zealand wines, but what is also interesting is that New Zealand wines seem to be more associated with French and South American wines than they are with Australian Wines.
 
-New Zealand and Australia are often grouped together, but in terms of wine this wouldn't make sense - perhaps because of the different climates the wines are very different and thus it wouldn't make sense to group wines by geographical proximity, but by preference instead.  This is only a hypothesis for now - we will need to take this back to the client and get their category experts to help us interpret it!
+New Zealand and Australia are often grouped together, but in terms of wine this wouldn't make sense - perhaps because of the different climates the wines are very different and thus it wouldn't make sense to group wines by geographical proximity, but by preference instead.  This is only a hypothesis for now - I would need to take this back to the client and get their category experts to help interpret it!
 
 ___
 <br>
 # Growth & Next Steps <a name="growth-next-steps"></a>
 
-As this was first and foremost an exploratory project, we will take back the results to the client Category Managers and discuss the results, our views on how these insights can be actioned best, and any considerations that need to be taken into account when interpreting.
+As this was first and foremost an exploratory project, the next step would be to discuss the results with Category Managers to share insights. From there I would recommend applying this same logic to all other categories, as well as potentially across the full-product range.
 
-From there, we will recommend applying this same logic to all other categories, as well as potentially across the full-product range.
-
-We will also propose the build of the "Keyword Search Engine" which will help Category Managers extract and utilise the insights held within the data.
+I would also propose the building of a "Keyword Search Engine" to help Category Managers extract and utilise the insights held within the data.
