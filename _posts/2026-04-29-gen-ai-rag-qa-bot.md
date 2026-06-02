@@ -40,13 +40,13 @@ ___
 
 ### Context <a name="overview-context"></a>
 
-Our client, a grocery retailer, operates a busy customer help-desk, answering queries around store hours, product availability, delivery services, loyalty cards, payments, and general store operations.
+My client, a grocery retailer, operates a busy customer help-desk, answering queries around store hours, product availability, delivery services, loyalty cards, payments, and general store operations.
 
-They need an **AI assistant** that can answer these questions accurately, consistently, and safely, using only approved internal information.
+They needed an **AI assistant** that could answer these questions accurately, consistently, and safely, using only approved internal information.
 
 ### Actions <a name="overview-actions"></a>
 
-We built a full end-to-end RAG system that:
+I built a full end-to-end RAG system that:
 
 * Loaded internal help-desk documentation  
 * Split it into meaningful chunks  
@@ -55,9 +55,9 @@ We built a full end-to-end RAG system that:
 * Retrieved only the most relevant content at query time  
 * Generated answers grounded strictly in this retrieved context  
 
-We also extended the project with **conversational memory**, enabling more natural multi-turn interactions while ensuring the assistant never hallucinates.
+I also extended the project with **conversational memory**, enabling more natural multi-turn interactions while ensuring the assistant never hallucinates.
 
-Internally, we also added monitoring, tracing, and evaluation using LangSmith during development.
+Internally, I also added monitoring, tracing, and evaluation using LangSmith during development.
 
 ### Results <a name="overview-results"></a>
 
@@ -76,7 +76,7 @@ Potential future enhancements include:
 * Ingestion of multiple document types (PDFs, product catalogues)  
 * Adding tool use such as SQL lookups for live stock, prices, or loyalty data  
 * Adding a real chat interface (frontend + backend)  
-* Streaming responses for improved UX  
+* Streaming responses for improved user experience 
 * Building automated daily document ingestion pipelines  
 
 ___
@@ -90,7 +90,7 @@ Each Q&A pair follows a consistent structure, which can be seen below for 5 exam
 ```md
 ### 0001
 Q: What is ABC Grocery?
-A: ABC Grocery is a family-run supermarket focused on fresh produce, household essentials, and friendly service.
+A: ABC Grocery is a family-run supermarket focused on fresh produce, household essentials and friendly service.
 
 ### 0004
 Q: What hours are you open on public holidays?
@@ -113,7 +113,7 @@ ___
 
 # 02. RAG Overview <a name="rag-overview"></a>
 
-Large Language Models are powerful, but they have a key limitation, **their knowledge is fixed at training time**, and they cannot reliably retrieve up-to-date, organisation-specific, or policy-specific information.
+Large Language Models are powerful, but they have a key limitation: **their knowledge is fixed at training time**, and they cannot reliably retrieve up-to-date, organisation-specific or policy-specific information.
 
 A naive solution would be to simply **feed the entire help-desk document into the model on every query**, but this has major drawbacks:
 
@@ -141,7 +141,7 @@ ___
 <br>
 ## Secure API Handling <a name="rag-api"></a>
 
-We load API keys from a **.env** file. This prevents credentials from being hard-coded directly in the script.
+I loaded API keys from a **.env** file to prevent credentials from being hard-coded directly in the script.
 
 ```python
 from dotenv import load_dotenv
@@ -153,7 +153,7 @@ load_dotenv()
 
 ## Document Loading <a name="rag-docs"></a>
 
-We use LangChain’s `TextLoader` to import our help-desk markdown file.
+I used LangChain’s `TextLoader` to import a help-desk markdown file.
 
 ```python
 from langchain_community.document_loaders import TextLoader
@@ -171,7 +171,7 @@ text = docs[0].page_content
 
 ## Document Chunking <a name="rag-chunking"></a>
 
-We split the markdown by level-3 headers (`###`), where each header introduces a new Q&A pair.
+I split the markdown by level-3 headers (`###`), where each header introduces a new Q&A pair.
 
 ```python
 from langchain_text_splitters import MarkdownHeaderTextSplitter
@@ -194,7 +194,7 @@ print(len(chunked_docs), "Q/A chunks")
 
 Embeddings convert text into **numeric vectors** that represent meaning.  Documents with similar meaning end up closer together in vector space.
 
-We embed each Q&A chunk and store the embeddings in Chroma:
+I embedded each Q&A chunk and stored the embeddings in Chroma:
 
 ```python
 from langchain_openai import OpenAIEmbeddings
@@ -211,7 +211,7 @@ vectorstore = Chroma.from_documents(
 ```
 
 <br>
-To load later, instead of re-creating from scratch, we can use this code:
+To retrieve the stored database from Chroma at a later date, instead of re-creating it from scratch, I used this code:
 
 ```python
 vectorstore = Chroma(
@@ -224,7 +224,7 @@ vectorstore = Chroma(
 
 ## LLM Setup <a name="rag-llm"></a>
 
-We instantiate the model that will generate the final answer:
+I instantiated the model that would generate the final answer:
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -243,7 +243,7 @@ A temperature of 0 is essential for help-desk systems where consistency and accu
 
 ## Prompt Template <a name="rag-prompt"></a>
 
-The prompt instructs the model to answer **only** using retrieved context, and to avoid hallucination.
+Using a LangChain template, I entered a prompt which instructed the model to answer **only** using retrieved context, and to avoid hallucination.
 
 ```python
 from langchain_core.prompts import ChatPromptTemplate
@@ -265,13 +265,13 @@ Answer:
 <br>
 **Why this matters:**  Prompt templates are the *instructions* that govern how the LLM behaves.  They ensure the assistant is safe, grounded, and consistent.
 
-We have kept this simple here, but have included one important instruction for the LLM: that if the answer is not in the context, to say that it doesn't have this information and to encourage the customer to email human@abc-grocery.com
+The prompt I used was quite basic, but it included one important instruction for the LLM: if the answer was not in the context, it was to say that it didn't have this information and should encourage the customer to email human@abc-grocery.com. This clause was included to prevent the LLM from hallucinating - making up an answer that might mislead the customer.
 
 ---
 
 ## Retriever Setup <a name="rag-retriever"></a>
 
-We configure how relevant chunks are selected from the vector database:
+I then configured how relevant chunks are selected from the vector database:
 
 ```python
 retriever = vectorstore.as_retriever(
@@ -280,15 +280,15 @@ retriever = vectorstore.as_retriever(
 ```
 
 <br>
-We have set this retrieval up in a way where it will retrieve *up to* 6 documents, but only if they meet the specified relevance score threshold of 0.25. 
+I set this retrieval up so that it would retrieve *up to* 6 documents, but only if they met the specified relevance score threshold of 0.25. 
 <br>
-This keeps the context focused and prevents irrelevant content from confusing the LLM.
+This was designed to keep the context focused and prevent irrelevant content from confusing the LLM.
 
 ---
 
 ## Full RAG Pipeline <a name="rag-pipeline"></a>
 
-This pipeline connects all of the key components of our system, namely:
+This pipeline connects all of the key components of our system:
 
 1. Take in the user query  
 2. Retrieve in relevant chunks from the vector database  
