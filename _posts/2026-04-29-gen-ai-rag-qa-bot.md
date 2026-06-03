@@ -138,7 +138,7 @@ ___
 <br>
 ## Secure API Handling <a name="rag-api"></a>
 
-I loaded API keys from a **.env** file to prevent credentials from being hard-coded directly in the script.
+I loaded API keys for Open AI and LangSmith from a **.env** file to prevent credentials from being hard-coded directly in the script.
 
 ```python
 from dotenv import load_dotenv
