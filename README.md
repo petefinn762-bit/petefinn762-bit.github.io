@@ -9,7 +9,7 @@ Check out some of my work in my [Online Portfolio](https://petefinn762-bit.githu
 
 *Programming*: SQL, Python (Base, Pandas, Numpy, Matplotlib, Scikit-Learn, Streamlit, Keras, LangChain)
 
-*Tools*: Excel, Tableau, Github, AWS (S3, Lambda, IAM, EC2, SageMaker, RDS, DynamoDB), Docker
+*Tools*: Excel, Word, PowerPoint, Tableau, Github, AWS (S3, Lambda, IAM, EC2, SageMaker, RDS, DynamoDB), Docker
 
 *Maths*: Linear Algebra, Statistics (Hypothesis Testing, AB Testing, Central Limit Theorem, Distributions)
 
