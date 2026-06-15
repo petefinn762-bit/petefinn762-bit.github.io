@@ -5,7 +5,7 @@ image: "/posts/ab-testing-title-img.png"
 tags: [AB Testing, Hypothesis Testing, Chi-Square, Python]
 ---
 
-In this project, I applied the chi-Square test for independence (a hypothesis test) to assess the performance of two types of mailer that were sent out to promote a new service.
+In this project, I applied the chi-square test for independence (a hypothesis test) to assess the performance of two types of mailer that were sent out to promote a new service.
 
 # Table of contents
 
