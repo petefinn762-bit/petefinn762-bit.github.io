@@ -300,7 +300,7 @@ data_for_clustering["cluster"] = kmeans.labels_
 <br>
 ### Cluster Profiling <a name="kmeans-cluster-profiling"></a>
 
-Once we have our data separated into distinct clusters, our client needs to understand *what is is* that is driving the separation.  This means the business can understand the customers within each, and the behaviours that make them unique.
+Once we have our data separated into distinct clusters, our client needs to understand *what it is* that is driving the separation.  This means the business can understand the customers within each, and the behaviours that make them unique.
 
 <br>
 ##### Cluster Sizes
